@@ -1,4 +1,5 @@
-impfrom datetime import date
+from datetime import datetime
+from datetime import date
 
 
 
@@ -21,4 +22,3 @@ class HouseInfo:
             if rec_date == strftime(record['date'],format="%m/%d/%y"):
                 field_data.append(record['date'])
         return field_data
-            

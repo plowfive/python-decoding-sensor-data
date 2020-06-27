@@ -1,5 +1,5 @@
 from load_data import load_sensor_data
-from sensor_app import house_info
+from house_info import HouseInfo
 
 # Runner script for all modules
 
@@ -21,7 +21,7 @@ house_info = HouseInfo(data)
 test_area = 1
 recs = HouseInfo.get_data_by_area("id",rec_area=test_area)
 
-print("\nHourse sensor records for area{} = {}".format(test_area, len(recs)))
+print("\nHouse sensor records for area{} = {}".format(test_area, len(recs)))
 
 # Module 2 code here:
 
