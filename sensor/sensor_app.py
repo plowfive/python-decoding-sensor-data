@@ -60,6 +60,9 @@ print("\tAverage: {} humidity".format(mean(recs)))
 particle_data = ParticleData(data)
 recs = particle_data.get_data_by_area(rec_area=test_area)
 print("\nParticle Sensor records for area {} = {}".format(test_area, len(recs)))
+print("\tGood Air Quality Recs: {}".format(concentrations["good"]))
+print("\tModerate Air Quality Recs: {}".format(concentrations["moderate"]))
+print("\tBad Air Quality Recs: {}".format(concentrations["bad"]))
 
 
 
