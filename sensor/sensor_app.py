@@ -2,6 +2,9 @@ from load_data import load_sensor_data
 from house_info import HouseInfo
 from temperature_info import TemperatureData
 from humidity_info import HumidityData
+from particle_count_info import ParticleData
+
+
 from datetime import datetime, date
 from statistics import mean
 
@@ -53,6 +56,11 @@ print("\tAverage: {} humidity".format(mean(recs)))
 recs = humidity_data.get_data_by_date(rec_date=test_date)
 print("\nHumidity Sensor records for date {} = {}".format(test_date.strftime("%m/%d/%y"), len(recs)))
 print("\tAverage: {} humidity".format(mean(recs)))
+
+particle_data = ParticleData(data)
+recs = particle_data.get_data_by_area(rec_area=test_area)
+print("\nParticle Sensor records for area {} = {}".format(test_area, len(recs)))
+
 
 
 
