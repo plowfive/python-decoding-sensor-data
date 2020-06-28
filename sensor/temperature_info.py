@@ -3,6 +3,7 @@ from house_info import HouseInfo
 
 
 class TemperatureData(HouseInfo):
+
     def _convert_data(self, data):
         recs = []
         for rec in data:
@@ -16,6 +17,5 @@ class TemperatureData(HouseInfo):
     def get_data_by_date(self,rec_date=date.today()):
         recs = super().get_data_by_date("temperature", rec_date)
         return self._convert_data(recs)
-
 
 
