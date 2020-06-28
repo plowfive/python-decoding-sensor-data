@@ -9,7 +9,7 @@ class ParticleData(HouseInfo):
             recs.append(float(rec))
         return recs
 
-    def get_data_by_area(self, rec_area=0):
+    def get_data_by_area(self, rec_area = 0):
         recs = super().get_data_by_area("particulate", rec_area)
         return self._convert_data(recs)
 
@@ -22,7 +22,7 @@ class ParticleData(HouseInfo):
         for rec in data:
             if rec <=50.0:
                 particulate["good"] += 1
-            elif rec > 50.0 and rec <= 100.0 :
+            elif rec > 50.0 and rec <= 100.0:
                 particulate["moderate"] +=1
             else:
                 particulate["bad"] += 1
