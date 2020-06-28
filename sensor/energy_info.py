@@ -1,36 +1,35 @@
 from house_info import HouseInfo
-
 from datetime import date
 
 class EnergyData(HouseInfo):
     ENERGY_PER_BULB = 0.2
-    ENERGY_BITS = 0X0F0
-
+    ENERGY_BITS = 0x0F0   #note lower case x
 
     def _get_energy(self, rec):
-        energy = int(rec,base=16)
-        energy = energy and ENERGY_BITS
+        energy = int(rec, base=16)
+        energy = energy & self.ENERGY_BITS  #mask ENERGY
+        energy = energy >> 4 #shift 4 bits to the right.
+        return energy
 
-
+    def _convert_data(self,data):
+        recs = []
+        for rec in data:
+            recs.append(self._get_energy(rec))
         return recs
 
-        # <editor-fold desc="Description">
-        def get_data_by_area(self, rec_area = 0):
-            recs = super().get_data_by_area("particulate", rec_area)
-            return self._convert_data(recs)
 
-        def get_data_by_date(self, rec_date=date.today()):
-            recs = super().get_data_by_date("particulate", rec_date)
-            return self._convert_data(recs)
+    def get_data_by_area(self,rec_area=0):
+        recs = super().get_data_by_area("energy_usage", rec_area)
+        return self._convert_data(recs)
 
-        def get_data_concentrations(self, data):
-            particulate = {"good": 0,"moderate": 0,"bad": 0}
-            for rec in data:
-                if rec <=50.0:
-                    particulate["good"] += 1
-                elif rec > 50.0 and rec <= 100.0:
-                    particulate["moderate"] +=1
-                else:
-                    particulate["bad"] += 1
-            return particulate
-        # </editor-fold>
+    def get_data_by_date(self,rec_date=date.today()):
+        recs = super().get_data_by_date("humidity", rec_date)
+        return self._convert_data(recs)
+
+    def calculate_energy_usage(self,data):
+        total_energy = sum([field * self.ENERGY_PER_BULB for field in data])
+        return total_energy
+
+
+
+
